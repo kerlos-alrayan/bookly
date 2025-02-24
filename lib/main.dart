@@ -1,4 +1,4 @@
-import 'package:bookly/constans.dart';
+import 'package:bookly/constants.dart';
 import 'package:bookly/features/home/data/presentation/views/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
