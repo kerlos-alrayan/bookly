@@ -1,5 +1,5 @@
 import 'package:bookly/core/utils/styles.dart';
-import 'package:bookly/features/home/data/presentation/views/widgets/best_seller_list_view_item.dart';
+import 'package:bookly/features/home/data/presentation/views/widgets/best_seller_list_view.dart';
 import 'package:bookly/features/home/data/presentation/views/widgets/custom_app_bar.dart';
 import 'package:bookly/features/home/data/presentation/views/widgets/featured_list_view.dart';
 import 'package:flutter/material.dart';
@@ -9,27 +9,47 @@ class HomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CustomAppBar(),
-          FeaturedBooksListView(),
-          const SizedBox(
-            height: 50,
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // App Bar
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                child: CustomAppBar(),
+              ),
+
+              FeaturedBooksListView(),
+              const SizedBox(
+                height: 50,
+              ),
+
+              // Best Seller
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Text(
+                  'Best Seller',
+                  style: Styles.textStyle18,
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+            ],
           ),
-          // Best Seller
-          Text(
-            'Best Seller',
-            style: Styles.textStyle18,
+        ),
+
+        // Best Seller List View
+        SliverFillRemaining(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: BestSellerListView(),
           ),
-          const SizedBox(
-            height: 20,
-          ),
-          BestSellerListViewItem(),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

@@ -37,6 +37,10 @@ dependencies:
   get: ^4.7.2
   font_awesome_flutter: ^10.8.0
   google_fonts: ^6.2.1
+  webview_flutter: ^4.10.0
+  webview_flutter_android: ^4.3.2
+  drag_and_drop_lists: ^0.4.2
+  lottie: ^3.3.1
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +70,9 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/images/
+    - assets/blockly/blockly_page.html
+    - assets/animations/
+    - assets/kids/kids.jpg
 
 
 
