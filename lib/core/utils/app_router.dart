@@ -15,7 +15,7 @@ abstract class AppRouter {
       GoRoute(
         path: '/', // Entry Point
         builder: (BuildContext context, GoRouterState state) =>
-            const SplashView(),
+            const BookDetailsView(),
       ),
       GoRoute(
         path: kHomeView,
