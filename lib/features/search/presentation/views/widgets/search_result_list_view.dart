@@ -1,14 +1,16 @@
-import 'package:bookly/core/utils/app_router.dart';
-import 'package:bookly/features/home/data/presentation/views/widgets/best_seller_list_view_item.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class BestSellerListView extends StatelessWidget {
-  const BestSellerListView({super.key});
+import '../../../../../core/utils/app_router.dart';
+import '../../../../home/data/presentation/views/widgets/best_seller_list_view_item.dart';
+
+class SearchResultListView extends StatelessWidget {
+  const SearchResultListView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+        physics: NeverScrollableScrollPhysics(),
         padding: EdgeInsets.zero,
         scrollDirection: Axis.vertical,
         itemCount: 15,
@@ -19,7 +21,7 @@ class BestSellerListView extends StatelessWidget {
                 onTap: (){
                   GoRouter.of(context).push(AppRouter.kBookDetailsView);
                 },
-                child: BookListViewItem()),
+                child:BookListViewItem()),
           );
         });
   }
