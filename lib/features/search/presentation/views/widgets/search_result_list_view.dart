@@ -10,7 +10,6 @@ class SearchResultListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        physics: NeverScrollableScrollPhysics(),
         padding: EdgeInsets.zero,
         scrollDirection: Axis.vertical,
         itemCount: 15,

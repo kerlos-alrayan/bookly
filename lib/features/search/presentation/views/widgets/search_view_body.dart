@@ -1,6 +1,6 @@
 import 'package:bookly/core/utils/styles.dart';
-import 'package:bookly/features/home/data/presentation/views/widgets/best_seller_list_view.dart';
 import 'package:bookly/features/search/presentation/views/widgets/custom_search_bar.dart';
+import 'package:bookly/features/search/presentation/views/widgets/search_result_list_view.dart';
 import 'package:flutter/material.dart';
 
 class SearchViewBody extends StatelessWidget {
@@ -23,7 +23,7 @@ class SearchViewBody extends StatelessWidget {
             style: Styles.textStyle18,
           ),
           Expanded(
-            child: BestSellerListView(),
+            child: SearchResultListView(),
           ),
         ],
       ),
