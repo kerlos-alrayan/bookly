@@ -4,6 +4,7 @@ import 'package:bookly/core/utils/service_locator.dart';
 import 'package:bookly/features/home/data/repos/home_repo_impl.dart';
 import 'package:bookly/features/home/presentation/manger/feature_books_cubit/feature_books_cubit.dart';
 import 'package:bookly/features/home/presentation/manger/newset_books_cubit/newset_books_cubit.dart';
+import 'package:bookly/test_image/test_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,10 +22,13 @@ class Bookly extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => FeatureBooksCubit(getIt.get<HomeRepoImpl>()),
+          create: (context) => FeatureBooksCubit(getIt.get<HomeRepoImpl>())..fetchFeaturedBooks(),
         ),
         BlocProvider(
           create: (context) => NewsetBooksCubit(getIt.get<HomeRepoImpl>()),
+        ),
+        BlocProvider(
+          create: (context) => TestCubit()..getBooksTest(),
         ),
       ],
       child: MaterialApp.router(

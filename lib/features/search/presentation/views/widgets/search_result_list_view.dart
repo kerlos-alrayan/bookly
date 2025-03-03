@@ -20,8 +20,9 @@ class SearchResultListView extends StatelessWidget {
                 onTap: (){
                   GoRouter.of(context).push(AppRouter.kBookDetailsView);
                 },
-                child:BookListViewItem()),
-          );
+          child: Text(''),
+                //child:BookListViewItem(imageUrl: '', title: '', averageRating: 0, ratingsCount: 0, amount: 0,,)),
+            ));
         });
   }
 }

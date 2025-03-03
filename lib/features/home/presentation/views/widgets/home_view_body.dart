@@ -17,17 +17,13 @@ class HomeViewBody extends StatelessWidget {
             children: [
               // App Bar
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                 child: CustomAppBar(),
               ),
-
               FeaturedBooksListView(),
-              const SizedBox(
-                height: 50,
-              ),
+              const SizedBox(height: 50),
 
-              // Best Seller
+              // Best Seller Title
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Text(
@@ -35,15 +31,12 @@ class HomeViewBody extends StatelessWidget {
                   style: Styles.textStyle18,
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
             ],
           ),
         ),
-
         // Best Seller List View
-        SliverFillRemaining(
+        SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: BestSellerListView(),

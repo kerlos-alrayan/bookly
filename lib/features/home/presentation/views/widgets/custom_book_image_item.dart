@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../core/utils/assets.dart';
 
 class CustomBookImage extends StatelessWidget {
-  const CustomBookImage({super.key});
+  const CustomBookImage({super.key, required this.imageUrl});
+  final String imageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +12,10 @@ class CustomBookImage extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          image: const DecorationImage(
-              image: AssetImage(AssetsData.testImage), fit: BoxFit.cover),
+          image: DecorationImage(
+            image: NetworkImage(imageUrl),
+            fit: BoxFit.fill
+          ),
         ),
       ),
     );
