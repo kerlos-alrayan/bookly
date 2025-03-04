@@ -23,7 +23,6 @@ class BestSellerListView extends StatelessWidget {
               scrollDirection: Axis.vertical,
               itemCount: state.books.length,
               itemBuilder: (context, index) {
-                print('Length of Books = ${state.books.length}');
                 final volumeInfo = state.books[index].volumeInfo;
                 final saleInfo = state.books[index].saleInfo;
                 final saleability = state.books[index].saleInfo!.retailPrice;

@@ -1,8 +1,10 @@
 import 'package:bookly/features/home/presentation/views/widgets/book_rating.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../constants.dart';
 import '../../../../../../core/utils/styles.dart';
+import '../../../../../core/utils/assets.dart';
 import '../../../data/models/book_model.dart';
 
 class BookListViewItem extends StatelessWidget {
@@ -29,13 +31,14 @@ class BookListViewItem extends StatelessWidget {
       width: MediaQuery.of(context).size.width * .85,
       child: Row(
         children: [
-          AspectRatio(
-            aspectRatio: 2.5 / 4,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                image: DecorationImage(
-                    image: NetworkImage(imageUrl), fit: BoxFit.cover),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: AspectRatio(
+              aspectRatio: 2.5 / 4,
+              child: CachedNetworkImage(
+                imageUrl: imageUrl,
+                fit: BoxFit.fill,
+                errorWidget: (context, url, error) => Image.asset(AssetsData.testImage, fit: BoxFit.cover,),
               ),
             ),
           ),
