@@ -1,4 +1,5 @@
 import 'package:bookly/features/home/presentation/views/widgets/book_rating.dart';
+import 'package:bookly/features/home/presentation/views/widgets/custom_book_image_item.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -8,40 +9,18 @@ import '../../../../../core/utils/assets.dart';
 import '../../../data/models/book_model.dart';
 
 class BookListViewItem extends StatelessWidget {
-  const BookListViewItem(
-      {super.key,
-      required this.imageUrl,
-      required this.title,
-      required this.averageRating,
-      required this.ratingsCount,
-        //required this.amount,
-     //   required this.notForSale
-      });
-  final String imageUrl;
-  final String title;
-  final double averageRating;
-  final int ratingsCount;
-//final double amount;
-  // final String notForSale;
+  const BookListViewItem({super.key, required this.books});
+  final BookModel books;
 
   @override
   Widget build(BuildContext context) {
+    final booksData = books.volumeInfo;
     return SizedBox(
       height: 125,
       width: MediaQuery.of(context).size.width * .85,
       child: Row(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-            child: AspectRatio(
-              aspectRatio: 2.5 / 4,
-              child: CachedNetworkImage(
-                imageUrl: imageUrl,
-                fit: BoxFit.fill,
-                errorWidget: (context, url, error) => Image.asset(AssetsData.testImage, fit: BoxFit.cover,),
-              ),
-            ),
-          ),
+          CustomBookImage(imageUrl: booksData.imageLinks.thumbnail),
           const SizedBox(
             width: 30,
           ),
@@ -52,7 +31,7 @@ class BookListViewItem extends StatelessWidget {
                 SizedBox(
                   width: MediaQuery.of(context).size.width * .5,
                   child: Text(
-                    title,
+                    booksData.title,
                     style: Styles.textStyle20.copyWith(
                       fontFamily: kGtSectraFine,
                     ),
@@ -64,7 +43,8 @@ class BookListViewItem extends StatelessWidget {
                   height: 3,
                 ),
                 Text(
-                  'J.K. Rowlinge',
+                  booksData.authors![0],
+                  overflow: TextOverflow.ellipsis,
                   style: Styles.textStyle14
                       .copyWith(color: const Color(0xff707070)),
                 ),
@@ -74,12 +54,15 @@ class BookListViewItem extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      '',
+                      'Free',
                       style: Styles.textStyle20
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
                     const Spacer(),
-                    BookRating(averageRating: averageRating, ratingsCount: ratingsCount,),
+                    BookRating(
+                      averageRating: booksData.averageRating,
+                      ratingsCount: booksData.ratingsCount,
+                    ),
                   ],
                 ),
               ],

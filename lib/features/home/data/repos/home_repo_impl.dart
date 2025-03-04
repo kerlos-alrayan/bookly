@@ -14,7 +14,7 @@ class HomeRepoImpl implements HomeRepo {
     try {
       var data = await apiService.get(
           endPoint:
-              'volumes?q=love');
+          'volumes?q=flutter&maxResults=40');
       List<BookModel> books = [];
       for (var item in data['items']) {
         books.add(BookModel.fromJson(item));
@@ -28,12 +28,12 @@ class HomeRepoImpl implements HomeRepo {
     }
   }
 
-  @override
+@override
   Future<Either<Failure, List<BookModel>>> fetchFeaturedBooks() async {
     try {
       var data = await apiService.get(
           endPoint:
-          'volumes?q=flutter&maxResults=40');
+          'volumes?q=love&maxResults=40');
       List<BookModel> books = [];
       for (var item in data['items']) {
         books.add(BookModel.fromJson(item));

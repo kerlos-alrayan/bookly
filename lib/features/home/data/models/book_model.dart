@@ -81,7 +81,7 @@ class Item {
 class VolumeInfo {
   final String title;
   final String subtitle;
-  final List<String> authors;
+  final List<String>? authors;
   final String publisher;
   final String publishedDate;
   final String description;
@@ -90,7 +90,7 @@ class VolumeInfo {
   final int ratingsCount;
   final bool allowAnonLogging;
   final String contentVersion;
-  final ImageLinks? imageLinks;
+  final ImageLinks imageLinks;
   final String previewLink;
   final String infoLink;
   final String canonicalVolumeLink;
@@ -98,7 +98,7 @@ class VolumeInfo {
   VolumeInfo({
     required this.title,
     required this.subtitle,
-    required this.authors,
+    this.authors,
     required this.publisher,
     required this.publishedDate,
     required this.description,
@@ -107,7 +107,7 @@ class VolumeInfo {
     required this.ratingsCount,
     required this.allowAnonLogging,
     required this.contentVersion,
-    this.imageLinks,
+    required this.imageLinks,
     required this.previewLink,
     required this.infoLink,
     required this.canonicalVolumeLink,
@@ -118,7 +118,7 @@ class VolumeInfo {
     subtitle: json["subtitle"] ?? '',
     authors: json["authors"] != null
         ? List<String>.from(json["authors"].map((x) => x.toString()))
-        : [],
+        : ['Not Fount Authors'],
     publisher: json["publisher"] ?? '',
     publishedDate: json["publishedDate"] ?? '',
     description: json["description"] ?? '',
@@ -127,9 +127,7 @@ class VolumeInfo {
     ratingsCount: json["ratingsCount"] ?? 0,
     allowAnonLogging: json["allowAnonLogging"] ?? false,
     contentVersion: json["contentVersion"] ?? '',
-    imageLinks: json["imageLinks"] != null
-        ? ImageLinks.fromJson(json["imageLinks"])
-        : null,
+    imageLinks: ImageLinks.fromJson(json["imageLinks"]),
     previewLink: json["previewLink"] ?? '',
     infoLink: json["infoLink"] ?? '',
     canonicalVolumeLink: json["canonicalVolumeLink"] ?? '',
@@ -138,7 +136,7 @@ class VolumeInfo {
   Map<String, dynamic> toJson() => {
     "title": title,
     "subtitle": subtitle,
-    "authors": List<dynamic>.from(authors.map((x) => x)),
+    "authors": List<dynamic>.from(authors!.map((x) => x)),
     "publisher": publisher,
     "publishedDate": publishedDate,
     "description": description,
@@ -147,7 +145,7 @@ class VolumeInfo {
     "ratingsCount": ratingsCount,
     "allowAnonLogging": allowAnonLogging,
     "contentVersion": contentVersion,
-    "imageLinks": imageLinks?.toJson(),
+    "imageLinks": imageLinks.toJson(),
     "previewLink": previewLink,
     "infoLink": infoLink,
     "canonicalVolumeLink": canonicalVolumeLink,
