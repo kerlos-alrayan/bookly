@@ -13,7 +13,7 @@ class LoadingFeaturedListView extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemBuilder: (BuildContext context, int index) =>
               Padding(
-                padding: const EdgeInsets.only(right: 16),
+                padding: const EdgeInsets.only(left: 16),
                 child: const LoadingCustomBookImage(),
               )),
     );

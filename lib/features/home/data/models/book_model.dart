@@ -86,6 +86,7 @@ class VolumeInfo {
   final String publishedDate;
   final String description;
   final int pageCount;
+  List<String> categories;
   final double averageRating;
   final int ratingsCount;
   final bool allowAnonLogging;
@@ -103,6 +104,7 @@ class VolumeInfo {
     required this.publishedDate,
     required this.description,
     required this.pageCount,
+    required this.categories,
     required this.averageRating,
     required this.ratingsCount,
     required this.allowAnonLogging,
@@ -123,8 +125,11 @@ class VolumeInfo {
     publishedDate: json["publishedDate"] ?? '',
     description: json["description"] ?? '',
     pageCount: json["pageCount"] ?? 0,
-    averageRating: json["averageRating"] ?? 0,
-    ratingsCount: json["ratingsCount"] ?? 0,
+    categories: json["categories"] != null
+        ? List<String>.from(json["categories"].map((x) => x.toString()))
+        : [],
+    averageRating:  (json["averageRating"] ?? 0).toDouble(),
+    ratingsCount: (json["ratingsCount"] ?? 0).toInt(),
     allowAnonLogging: json["allowAnonLogging"] ?? false,
     contentVersion: json["contentVersion"] ?? '',
     imageLinks: ImageLinks.fromJson(json["imageLinks"]),
@@ -141,6 +146,7 @@ class VolumeInfo {
     "publishedDate": publishedDate,
     "description": description,
     "pageCount": pageCount,
+    "categories": List<dynamic>.from(categories.map((x) => x)),
     "averageRating": averageRating,
     "ratingsCount": ratingsCount,
     "allowAnonLogging": allowAnonLogging,
@@ -151,6 +157,18 @@ class VolumeInfo {
     "canonicalVolumeLink": canonicalVolumeLink,
   };
 }
+
+enum Category {
+  BUSINESS_ECONOMICS,
+  COMPUTERS,
+  PSYCHOLOGY
+}
+
+final categoryValues = EnumValues({
+  "Business & Economics": Category.BUSINESS_ECONOMICS,
+  "Computers": Category.COMPUTERS,
+  "Psychology": Category.PSYCHOLOGY
+});
 
 
 class SaleInfo {
@@ -229,4 +247,16 @@ class ImageLinks {
     "smallThumbnail": smallThumbnail,
     "thumbnail": thumbnail,
   };
+}
+
+class EnumValues<T> {
+  Map<String, T> map;
+  late Map<T, String> reverseMap;
+
+  EnumValues(this.map);
+
+  Map<T, String> get reverse {
+    reverseMap = map.map((k, v) => MapEntry(v, k));
+    return reverseMap;
+  }
 }

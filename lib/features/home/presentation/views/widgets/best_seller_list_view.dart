@@ -1,9 +1,7 @@
-import 'package:bookly/core/utils/app_router.dart';
 import 'package:bookly/features/home/presentation/views/widgets/best_seller_list_view_item.dart';
 import 'package:bookly/features/home/presentation/views/widgets/loading_books_list_view_items.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../../core/widgets/custom_error_widget.dart';
 import '../../manger/newset_books_cubit/newset_books_cubit.dart';
@@ -25,11 +23,7 @@ class BestSellerListView extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: GestureDetector(
-                      onTap: () {
-                        GoRouter.of(context).push(AppRouter.kBookDetailsView);
-                      },
-                      child: BookListViewItem(books: state.books[index],)),
+                  child: BookListViewItem(books: state.books[index],),
                 );
               });
         } else if (state is NewsetBooksFailure) {

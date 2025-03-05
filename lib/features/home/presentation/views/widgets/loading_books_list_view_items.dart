@@ -23,42 +23,48 @@ class LoadingBookListViewItem extends StatelessWidget {
           child: Shimmer.fromColors(
             baseColor: ShimmerColors.baseShimmerColor,
             highlightColor: ShimmerColors.highlightShimmerColor,
-            child: Row(
-              children: [
-                LoadingCustomBookImage(),
-                const SizedBox(width: 30),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      customLoadingContainer(
-                        height: 40,
-                        width: MediaQuery.of(context).size.width * .5,
-                      ),
-                      const SizedBox(height: 10),
-                      customLoadingContainer(
-                        height: 20,
-                        width: MediaQuery.of(context).size.width * .3,
-                      ),
-                      const SizedBox(height: 10),
-                      Row(
-                        children: [
-                          customLoadingContainer(
-                            height: 20,
-                            width: 50,
-                          ),
-                          const Spacer(),
-                          customLoadingContainer(
-                            height: 20,
-                            width: 100,
-                          ),
-                        ],
-                      ),
-                    ],
+            child: Padding(
+              padding: const EdgeInsets.only(right: 16),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 16,
                   ),
-                ),
-              ],
+                  LoadingCustomBookImage(),
+                  const SizedBox(width: 30),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        customLoadingContainer(
+                          height: 40,
+                          width: MediaQuery.of(context).size.width * .5,
+                        ),
+                        const SizedBox(height: 10),
+                        customLoadingContainer(
+                          height: 20,
+                          width: MediaQuery.of(context).size.width * .3,
+                        ),
+                        const SizedBox(height: 10),
+                        Row(
+                          children: [
+                            customLoadingContainer(
+                              height: 20,
+                              width: 50,
+                            ),
+                            const Spacer(),
+                            customLoadingContainer(
+                              height: 20,
+                              width: 100,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

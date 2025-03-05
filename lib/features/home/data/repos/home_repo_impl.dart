@@ -14,7 +14,7 @@ class HomeRepoImpl implements HomeRepo {
     try {
       var data = await apiService.get(
           endPoint:
-          'volumes?q=flutter&maxResults=40');
+              'volumes?q=computer science&maxResults=40&filter=free-ebooks');
       List<BookModel> books = [];
       for (var item in data['items']) {
         books.add(BookModel.fromJson(item));
@@ -28,12 +28,30 @@ class HomeRepoImpl implements HomeRepo {
     }
   }
 
-@override
+  @override
   Future<Either<Failure, List<BookModel>>> fetchFeaturedBooks() async {
     try {
       var data = await apiService.get(
+          endPoint: 'volumes?q=love&maxResults=40&filter=free-ebooks');
+      List<BookModel> books = [];
+      for (var item in data['items']) {
+        books.add(BookModel.fromJson(item));
+      }
+      return right(books);
+    } catch (e) {
+      if (e is DioException) {
+        return Left(ServerFailure.fromDioException(e));
+      }
+      return left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<BookModel>>> fetchSimilarBooks({required String category}) async {
+    try {
+      var data = await apiService.get(
           endPoint:
-          'volumes?q=love &maxResults=40');
+          'volumes?q=love&maxResults=40&filter=free-ebooks&sorting=relevance');
       List<BookModel> books = [];
       for (var item in data['items']) {
         books.add(BookModel.fromJson(item));

@@ -16,9 +16,11 @@ class HomeViewBody extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: 10,),
               // App Bar
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
                 child: CustomAppBar(),
               ),
               FeaturedBooksListView(),
@@ -26,7 +28,7 @@ class HomeViewBody extends StatelessWidget {
 
               // Best Seller Title
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Text(
                   'Newset Books',
                   style: Styles.textStyle18,
@@ -38,10 +40,7 @@ class HomeViewBody extends StatelessWidget {
         ),
         // Best Seller List View
         SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: BestSellerListView(),
-          ),
+          child: BestSellerListView(),
         ),
       ],
     );

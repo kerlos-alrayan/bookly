@@ -12,7 +12,7 @@ class CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Image.asset(AssetsData.logo,height: 18,),
+        Image.asset(AssetsData.logo,height: 20,),
         const Spacer(),
         IconButton(
           onPressed: () {
