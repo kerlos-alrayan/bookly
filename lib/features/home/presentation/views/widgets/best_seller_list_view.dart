@@ -1,11 +1,11 @@
 import 'package:bookly/core/utils/app_router.dart';
 import 'package:bookly/features/home/presentation/views/widgets/best_seller_list_view_item.dart';
+import 'package:bookly/features/home/presentation/views/widgets/loading_books_list_view_items.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../core/widgets/custom_error_widget.dart';
-import '../../../../../core/widgets/custom_loading_indicator.dart';
 import '../../manger/newset_books_cubit/newset_books_cubit.dart';
 
 class BestSellerListView extends StatelessWidget {
@@ -35,7 +35,7 @@ class BestSellerListView extends StatelessWidget {
         } else if (state is NewsetBooksFailure) {
           return CustomErrorWidget(errorMessage: state.errorMessage);
         } else {
-          return const CustomLoadingIndicator();
+          return const LoadingBookListViewItem();
         }
       },
     );

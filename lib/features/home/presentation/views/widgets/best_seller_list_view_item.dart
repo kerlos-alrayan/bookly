@@ -1,11 +1,9 @@
 import 'package:bookly/features/home/presentation/views/widgets/book_rating.dart';
 import 'package:bookly/features/home/presentation/views/widgets/custom_book_image_item.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../constants.dart';
 import '../../../../../../core/utils/styles.dart';
-import '../../../../../core/utils/assets.dart';
 import '../../../data/models/book_model.dart';
 
 class BookListViewItem extends StatelessWidget {
@@ -73,3 +71,4 @@ class BookListViewItem extends StatelessWidget {
     );
   }
 }
+
