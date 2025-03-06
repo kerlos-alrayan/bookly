@@ -25,11 +25,12 @@ class SimilarBooksListView extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 10),
                 child: GestureDetector(
                     onTap: () {
-                      GoRouter.of(context).push(AppRouter.kBookDetailsView, extra: state.similarBooks[index]);
-
+                      GoRouter.of(context).push(AppRouter.kBookDetailsView,
+                          extra: state.similarBooks[index]);
                     },
                     child: CustomBookImage(
-                      imageUrl: state.similarBooks[index].volumeInfo.imageLinks.thumbnail,
+                      imageUrl: state
+                          .similarBooks[index].volumeInfo.imageLinks!.thumbnail,
                     )),
               ),
             ),
@@ -38,15 +39,15 @@ class SimilarBooksListView extends StatelessWidget {
           return CustomErrorWidget(errorMessage: state.errorMessage);
         } else {
           return SizedBox(
-          height: MediaQuery.of(context).size.height * 0.15,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: 15,
-            itemBuilder: (context, index) => Padding(
-              padding: const EdgeInsets.only(right: 10),
-              child: LoadingCustomBookImage(),
+            height: MediaQuery.of(context).size.height * 0.15,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 15,
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: LoadingCustomBookImage(),
+              ),
             ),
-          ),
           );
         }
       },

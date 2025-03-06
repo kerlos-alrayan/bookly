@@ -81,17 +81,17 @@ class Item {
 class VolumeInfo {
   final String title;
   final String subtitle;
-  final List<String>? authors;
+  final List<String> authors;
   final String publisher;
   final String publishedDate;
   final String description;
   final int pageCount;
-  List<String> categories;
+  final List<String> categories;
   final double averageRating;
   final int ratingsCount;
   final bool allowAnonLogging;
   final String contentVersion;
-  final ImageLinks imageLinks;
+  final ImageLinks? imageLinks; // ملاحظة: جعلت الصورة اختيارية (nullable)
   final String previewLink;
   final String infoLink;
   final String canonicalVolumeLink;
@@ -99,7 +99,7 @@ class VolumeInfo {
   VolumeInfo({
     required this.title,
     required this.subtitle,
-    this.authors,
+    required this.authors,
     required this.publisher,
     required this.publishedDate,
     required this.description,
@@ -109,30 +109,32 @@ class VolumeInfo {
     required this.ratingsCount,
     required this.allowAnonLogging,
     required this.contentVersion,
-    required this.imageLinks,
+    this.imageLinks,
     required this.previewLink,
     required this.infoLink,
     required this.canonicalVolumeLink,
   });
 
   factory VolumeInfo.fromJson(Map<String, dynamic> json) => VolumeInfo(
-    title: json["title"] ?? '',
-    subtitle: json["subtitle"] ?? '',
+    title: json["title"] ?? 'No Title Available',
+    subtitle: json["subtitle"] ?? 'No Subtitle',
     authors: json["authors"] != null
         ? List<String>.from(json["authors"].map((x) => x.toString()))
-        : ['Not Fount Authors'],
-    publisher: json["publisher"] ?? '',
-    publishedDate: json["publishedDate"] ?? '',
-    description: json["description"] ?? '',
+        : ['Unknown Author'],
+    publisher: json["publisher"] ?? 'Unknown Publisher',
+    publishedDate: json["publishedDate"] ?? 'Unknown Date',
+    description: json["description"] ?? 'No Description Available',
     pageCount: json["pageCount"] ?? 0,
     categories: json["categories"] != null
         ? List<String>.from(json["categories"].map((x) => x.toString()))
-        : [],
-    averageRating:  (json["averageRating"] ?? 0).toDouble(),
+        : ['No Categories'],
+    averageRating: (json["averageRating"] ?? 0.0).toDouble(),
     ratingsCount: (json["ratingsCount"] ?? 0).toInt(),
     allowAnonLogging: json["allowAnonLogging"] ?? false,
-    contentVersion: json["contentVersion"] ?? '',
-    imageLinks: ImageLinks.fromJson(json["imageLinks"]),
+    contentVersion: json["contentVersion"] ?? 'Unknown Version',
+    imageLinks: json["imageLinks"] != null
+        ? ImageLinks.fromJson(json["imageLinks"])
+        : null,
     previewLink: json["previewLink"] ?? '',
     infoLink: json["infoLink"] ?? '',
     canonicalVolumeLink: json["canonicalVolumeLink"] ?? '',
@@ -141,7 +143,7 @@ class VolumeInfo {
   Map<String, dynamic> toJson() => {
     "title": title,
     "subtitle": subtitle,
-    "authors": List<dynamic>.from(authors!.map((x) => x)),
+    "authors": List<dynamic>.from(authors.map((x) => x)),
     "publisher": publisher,
     "publishedDate": publishedDate,
     "description": description,
@@ -151,12 +153,13 @@ class VolumeInfo {
     "ratingsCount": ratingsCount,
     "allowAnonLogging": allowAnonLogging,
     "contentVersion": contentVersion,
-    "imageLinks": imageLinks.toJson(),
+    "imageLinks": imageLinks?.toJson(),
     "previewLink": previewLink,
     "infoLink": infoLink,
     "canonicalVolumeLink": canonicalVolumeLink,
   };
 }
+
 
 enum Category {
   BUSINESS_ECONOMICS,

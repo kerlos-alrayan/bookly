@@ -26,7 +26,7 @@ class BookListViewItem extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Row(
             children: [
-              CustomBookImage(imageUrl: booksData.imageLinks.thumbnail),
+              CustomBookImage(imageUrl: booksData.imageLinks!.thumbnail),
               const SizedBox(
                 width: 30,
               ),
@@ -49,7 +49,7 @@ class BookListViewItem extends StatelessWidget {
                       height: 3,
                     ),
                     Text(
-                      booksData.authors![0],
+                      getFirstAuthor(booksData.authors),
                       overflow: TextOverflow.ellipsis,
                       style: Styles.textStyle14
                           .copyWith(color: const Color(0xff707070)),
@@ -79,6 +79,12 @@ class BookListViewItem extends StatelessWidget {
         ),
       ),
     );
+  }
+  String getFirstAuthor(List<String>? authors) {
+    if (authors != null && authors.isNotEmpty) {
+      return authors[0];
+    }
+    return 'Unknown Author';
   }
 }
 

@@ -24,9 +24,11 @@ final BookModel bookModel;
         Expanded(
           child: CustomButton(
             onPressed: () async{
-              Uri uri = Uri.parse(bookModel.volumeInfo.previewLink);
+              Uri uri = Uri.parse('https://www.google.com/');
               if (await canLaunchUrl(uri)) {
                 await launchUrl(uri);
+              } else {
+               //print('You cant open this url');
               }
             },
             backgroundColor: const Color(0xffEF8262),

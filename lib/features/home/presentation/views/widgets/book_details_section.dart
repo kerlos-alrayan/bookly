@@ -21,7 +21,7 @@ class BookDetailsSection extends StatelessWidget {
             padding: EdgeInsets.symmetric(
                 horizontal: MediaQuery.of(context).size.width * .2),
             child: CustomBookImage(
-              imageUrl: bookDetails.imageLinks.thumbnail,
+              imageUrl: bookDetails.imageLinks!.thumbnail,
             ),
           ),
           const SizedBox(
@@ -36,7 +36,7 @@ class BookDetailsSection extends StatelessWidget {
             height: 6,
           ),
           Text(
-            bookDetails.authors![0],
+            bookDetails.authors[0],
             textAlign: TextAlign.center,
             style: Styles.textStyle18
                 .copyWith(fontFamily: 'Raleway', fontWeight: FontWeight.w500),
