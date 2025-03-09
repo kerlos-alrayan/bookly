@@ -24,11 +24,14 @@ class FeaturedBooksListView extends StatelessWidget {
               itemCount: state.books.length,
               itemBuilder: (context, index) => GestureDetector(
                 onTap: () {
-                  GoRouter.of(context).push(AppRouter.kBookDetailsView, extra: state.books[index]);
+                  GoRouter.of(context).push(AppRouter.kBookDetailsView,
+                      extra: state.books[index]);
                 },
                 child: Row(
                   children: [
-                    SizedBox(width: 16,),
+                    SizedBox(
+                      width: 16,
+                    ),
                     CustomBookImage(
                       imageUrl:
                           state.books[index].volumeInfo.imageLinks!.thumbnail,
