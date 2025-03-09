@@ -56,23 +56,4 @@ class StorageService {
       return null;
     }
   }
-
-  static Future<void> saveSearchBooks(
-      String query, List<dynamic> searchBooks) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(
-        'search_data_$query', jsonEncode({'searchBooks': searchBooks}));
-  }
-
-  static Future<Map<String, dynamic>?> getSearchBookS(String query) async {
-    final prefs = await SharedPreferences.getInstance();
-    final String? jsonString = prefs.getString('search_data_$query');
-    if (jsonString == null) return null;
-
-    try {
-      return jsonDecode(jsonString) as Map<String, dynamic>;
-    } catch (e) {
-      return null;
-    }
-  }
 }

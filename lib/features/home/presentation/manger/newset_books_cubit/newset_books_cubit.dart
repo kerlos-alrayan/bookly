@@ -12,8 +12,8 @@ class NewsetBooksCubit extends Cubit<NewsetBooksState> {
   NewsetBooksCubit(this.homeRepo) : super(NewsetBooksInitial());
 
   final HomeRepo homeRepo;
-
-  Future<void> fetchNewsetBooks() async {
+  Future<void> fetchNewsetBooks({bool isRefresh = false}) async {
+    if (!isRefresh) emit(NewsetBooksLoading());
     bool isConnected = await ConnectivityService.checkConnection();
     if (isConnected) {
       var response = await homeRepo.fetchNewsetBooks();

@@ -9,7 +9,6 @@ part 'feature_books_state.dart';
 
 class FeatureBooksCubit extends Cubit<FeatureBooksState> {
   FeatureBooksCubit(this.homeRepo) : super(FeatureBooksInitial());
-
   final HomeRepo homeRepo;
 
   Future<void> fetchFeaturedBooks() async {
@@ -17,6 +16,7 @@ class FeatureBooksCubit extends Cubit<FeatureBooksState> {
 
     bool isConnected = await ConnectivityService.checkConnection();
     if (isConnected) {
+
       var response = await homeRepo.fetchFeaturedBooks();
       response.fold((failure) async {
         var cachedData = await StorageService.getFeaturedBooks();

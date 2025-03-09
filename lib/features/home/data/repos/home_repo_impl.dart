@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:bookly/core/errors/failures.dart';
 import 'package:bookly/core/utils/api_service.dart';
 import 'package:bookly/features/home/data/models/book_model.dart';
@@ -7,14 +8,19 @@ import 'package:dio/dio.dart';
 
 class HomeRepoImpl implements HomeRepo {
   ApiService apiService;
+  final Random _random = Random();
   HomeRepoImpl(this.apiService);
 
   @override
-  Future<Either<Failure, List<BookModel>>> fetchNewsetBooks() async {
+  Future<Either<Failure, List<BookModel>>> fetchNewsetBooks({int startIndex = 0}) async {
     try {
+      int randomStartIndex = _random.nextInt(100);
+
       var data = await apiService.get(
-          endPoint:
-              'volumes?q=computer science&maxResults=40&filter=free-ebooks');
+        endPoint:
+        'volumes?q=computer science&maxResults=40&filter=free-ebooks&startIndex=$randomStartIndex',
+      );
+
       List<BookModel> books = [];
       for (var item in data['items']) {
         books.add(BookModel.fromJson(item));
@@ -29,10 +35,12 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Future<Either<Failure, List<BookModel>>> fetchFeaturedBooks() async {
+  Future<Either<Failure, List<BookModel>>> fetchFeaturedBooks({int startIndex = 0}) async {
     try {
+      int randomStartIndex = _random.nextInt(100);
+
       var data = await apiService.get(
-          endPoint: 'volumes?q=love&maxResults=40&filter=free-ebooks');
+          endPoint: 'volumes?q=love&maxResults=40&filter=free-ebooks&startIndex=$randomStartIndex');
       List<BookModel> books = [];
       for (var item in data['items']) {
         books.add(BookModel.fromJson(item));
@@ -68,14 +76,15 @@ class HomeRepoImpl implements HomeRepo {
 
   @override
   Future<Either<Failure, List<BookModel>>> fetchSearchBooks(
-      {required String query}) async {
+      {required String query, int startIndex = 0}) async {
     try {
+      int randomStartIndex = _random.nextInt(100);
       if (query.isEmpty) {
         return right([]);
       }
       var data = await apiService.get(
           endPoint:
-              'volumes?q=$query&maxResults=40&filter=free-ebooks&sorting=relevance');
+              'volumes?q=$query&maxResults=40&filter=free-ebooks&sorting=relevance&startIndex=$randomStartIndex');
 
       if (data == null || !data.containsKey('items') || data['items'] == null) {
         print('No items found in response.');

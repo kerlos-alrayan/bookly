@@ -41,7 +41,7 @@ class SimilarBooksCubit extends Cubit<SimilarBooksState> {
         emit(SimilarBooksSuccess(cachedBooks));
       } else {
         emit(SimilarBooksFailure(
-            'No internet connection and no cached data available.'));
+            'No internet connection, so no books available🤷‍♂️'));
       }
     }
   }

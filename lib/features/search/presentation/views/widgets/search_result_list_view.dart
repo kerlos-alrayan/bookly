@@ -24,24 +24,30 @@ class SearchResultListView extends StatelessWidget {
               ),
             );
           }
-          return ListView.builder(
-            padding: EdgeInsets.zero,
-            scrollDirection: Axis.vertical,
-            itemCount: state.searchBooks.length,
-            itemBuilder: (context, index) {
-              final book = state.searchBooks[index];
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: GestureDetector(
-                  onTap: () {
-                    GoRouter.of(context)
-                        .push(AppRouter.kBookDetailsView, extra: book);
-                  },
-                  child: BookListViewItem(books: book),
-                ),
-              );
-            },
-          );
+          return RefreshIndicator(
+              onRefresh: () async {
+                context
+                    .read<SearchCubit>()
+                    .fetchSearchBooks(query: "Your Query");
+              },
+              child: ListView.builder(
+                padding: EdgeInsets.zero,
+                scrollDirection: Axis.vertical,
+                itemCount: state.searchBooks.length,
+                itemBuilder: (context, index) {
+                  final book = state.searchBooks[index];
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: GestureDetector(
+                      onTap: () {
+                        GoRouter.of(context)
+                            .push(AppRouter.kBookDetailsView, extra: book);
+                      },
+                      child: BookListViewItem(books: book),
+                    ),
+                  );
+                },
+              ));
         } else if (state is SearchLoading) {
           return LoadingBookListViewItem();
         } else if (state is SearchFailure) {
